@@ -84,31 +84,50 @@ var requestHandler = function(request, response) {
     
   };                                             
   
-  // if (!routes[urlParts.pathname]) {
-  //   sendResponse(reponse, 'Not Found', 404);  
-  // } else {
-  //   if(request.method !== 'GET') {
-  //     sendResponse(reponse, 'Not Found', 404);  
-  //   }
-  // }
   
   var successResponse = false;
   
-  if (routes[urlParts.pathname] && request.method === 'POST') {
-    request.on('data', function(data) {
-      serverData.push(JSON.parse(data));
-    });
-    sendResponse(response, 'Posted!', 201); 
-    successResponse = true; 
-  }
   
-  if (routes[urlParts.pathname] && request.method === 'GET') {
+  if (routes[urlParts.pathname]) {
+    if (request.method === 'POST') {
+      
+      var body = '';
+      request.on('data', function(chunk) {
+        body += chunk;
+      });
+      request.on('end', function() {
+        var data = JSON.parse(body);
+        var boolean = data.username && data.username.length && (typeof data.username === 'string');
+        boolean = boolean && data.text && data.text.length && (typeof data.text === 'string');
+        if (boolean) {
+          serverData.push(data);
+          sendResponse(response, 'Posted!', 201);
+        } else {
+          (sendResponse(response, 'Requires non-empty name and text', 400));
+        }
+      });
+      
+      successResponse = true; 
+    }
     
-    sendResponse(response, serverData, 200); 
-    successResponse = true; 
+    if (request.method === 'GET') {
+      sendResponse(response, serverData, 200); 
+      successResponse = true; 
+    }
+    
+    if (request.method === 'OPTIONS') {
+      sendResponse(response, 'welcome', 200);
+      successResponse = true;
+    }
+    
+    if (['DELETE', 'PUT'].includes(request.method)) {
+      sendResponse(response, 'You Wish!', 401);
+      successResponse = true;
+    }
   }
 
   (successResponse) || (sendResponse(response, 'Not Found', 404));
+  
   
   
   // sendResponse(response, {results:['Hello world!']},200,'application/json');

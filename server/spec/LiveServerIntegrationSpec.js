@@ -46,6 +46,62 @@ describe('server', function() {
       done();
     });
   });
+  
+  it('should deny POST requests to /classes/messages with empty username', function(done) {
+    var requestParams = {method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: '',
+        text: 'Do my bidding!'}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(400);
+      done();
+    });
+  });
+  
+  it('should deny POST requests to /classes/messages with empty text', function(done) {
+    var requestParams = {method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jono',
+        text: ''}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(400);
+      done();
+    });
+  });
+  
+  it('should deny DELETE requests to /classes/messages', function(done) {
+    var requestParams = {method: 'DELETE',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jono',
+        text: 'Do my bidding!'}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
+  
+  it('should deny PUT requests to /classes/messages', function(done) {
+    var requestParams = {method: 'PUT',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jono',
+        text: 'Do my bidding!'}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
 
   it('should respond with messages that were previously posted', function(done) {
     var requestParams = {method: 'POST',
