@@ -1,0 +1,15 @@
+{"username":"bear","text":"Test1","roomname":"Romm","createdAt":"2018-05-15T22:57:36.741Z"}
+{"username":"bear","text":"Test2","roomname":"Romm","createdAt":"2018-05-15T22:57:44.158Z"}
+{"username":"bear","text":"Test3","roomname":"Romm","createdAt":"2018-05-15T22:57:47.555Z"}
+{"username":"bear","text":"Test4","roomname":"Romm","createdAt":"2018-05-15T22:59:36.782Z"}
+{"username":"bear","text":"Test5","roomname":"Romm","createdAt":"2018-05-15T22:59:44.371Z"}
+{"username":"bear","text":"Test1","roomname":"Romm","createdAt":"2018-05-15T23:01:42.509Z"}
+{"username":"bear","text":"NewTest01","roomname":"Room","createdAt":"2018-05-15T23:03:27.408Z"}
+{"username":"bear","text":"NewTest02","roomname":"Room","createdAt":"2018-05-15T23:03:34.738Z"}
+{"username":"bear","text":"NewTest03","roomname":"Room","createdAt":"2018-05-15T23:04:38.470Z"}
+{"username":"bear","text":"NewTest03","roomname":"Room","createdAt":"2018-05-15T23:06:15.738Z"}
+{"username":"bear","text":"NewTest03","roomname":"Room","createdAt":"2018-05-15T23:06:15.817Z"}
+{"username":"bear","text":"NewTest03","roomname":"Room","createdAt":"2018-05-15T23:06:16.301Z"}
+{"username":"bear","text":"NewTest03","roomname":"Room","createdAt":"2018-05-15T23:07:51.659Z"}
+{"username":"bear","text":"Hello","roomname":"Romm","createdAt":"2018-05-15T23:09:22.851Z"}
+{"username":"friend","text":"Do you want to be my friend?","roomname":"Romm","createdAt":"2018-05-15T23:11:11.274Z"}

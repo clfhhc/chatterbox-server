@@ -13,8 +13,8 @@ this file and include it in basic-server.js so that it actually works.
 **************************************************************/
 var url = require('url');
 var _ = require('underscore');
+var fs = require('fs');
 
-var serverData = [];
 
 var defaultCorsHeaders = {
   'access-control-allow-origin': '*',
@@ -102,7 +102,7 @@ var requestHandler = function(request, response) {
         boolean = boolean && data.text && data.text.length && (typeof data.text === 'string');
         if (boolean) {
           data.createdAt = new Date();
-          serverData.push(data);
+          fs.appendFile('./server/log.txt', JSON.stringify(data) + '\n', 'utf8');
           sendResponse(response, ['Posted!'], 201);
         } else {
           (sendResponse(response, ['Requires non-empty name and text'], 400));
@@ -113,7 +113,16 @@ var requestHandler = function(request, response) {
     }
     
     if (request.method === 'GET') {
-      sendResponse(response, serverData, 200, 'application/json'); 
+      fs.readFile('./server/log.txt', (err, data) => {
+        if (err) {
+          throw err;
+        }
+        // serverData = JSON.parse(data);
+        // console.log(serverData);
+        serverData = data.toString('utf-8').split('\n').filter(item => !!item).map(item => JSON.parse(item));
+        // console.log(data.toString('utf-8').split('\n').map(item => JSON.parse(item)));
+        sendResponse(response, serverData, 200, 'application/json'); 
+      });
       successResponse = true; 
     }
     
