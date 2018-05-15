@@ -7,8 +7,7 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/underscore/underscore-min.js"></script>
-
+    <script src="bower_components/underscore/underscore.js"></script>
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
@@ -21,22 +20,30 @@
       }
     </script>
     <!-- your scripts -->
-    <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/main.js"></script>
   </head>
   <body>
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
+      <form action="#" name="send" id="send" method="post">
+        <!--<label>Visitor:</label>
+        <input type="text" name="visitor" id="visitor" size="12" value="visitor">-->
+        <label>Room to send:</label>
+        <input type="text" name="roomset" id="roomset"  value="8thfloor">
+        <label>message:</label>
+        <input type="text" name="message" id="message"  value="Hello">
+        <input type="submit" name="submit" value="Submit">
+      </form>
+      <fieldset class="room">
+        <label>Room:</label>
+        <select name="roomSelect" id="roomSelect">
+          <!--<option value="roomA" selected="selected">roomA</option>-->
+        </select>
+      </fieldset>
+      <div class = "usernameList"></div>
     </div>
-    <div class="roomTitle"> Room: </div>
-    <select name='rooms', id='roomSelect'>
-    </select>
-    <input type="text" id="addRoom">
-    <input type="button" class="submitRoom" value="Add Room"/>
-    <input type="text" id="send">
-    <input type="button" class="submit" value="Add Message"/>
-    <button type="button" class="refresh">refresh</button>
     <div id="chats"></div>
   </body>
 </html>

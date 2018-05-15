@@ -101,10 +101,11 @@ var requestHandler = function(request, response) {
         var boolean = data.username && data.username.length && (typeof data.username === 'string');
         boolean = boolean && data.text && data.text.length && (typeof data.text === 'string');
         if (boolean) {
+          data.createdAt = new Date();
           serverData.push(data);
-          sendResponse(response, 'Posted!', 201);
+          sendResponse(response, ['Posted!'], 201);
         } else {
-          (sendResponse(response, 'Requires non-empty name and text', 400));
+          (sendResponse(response, ['Requires non-empty name and text'], 400));
         }
       });
       
@@ -112,22 +113,22 @@ var requestHandler = function(request, response) {
     }
     
     if (request.method === 'GET') {
-      sendResponse(response, serverData, 200); 
+      sendResponse(response, serverData, 200, 'application/json'); 
       successResponse = true; 
     }
     
     if (request.method === 'OPTIONS') {
-      sendResponse(response, 'welcome', 200);
+      sendResponse(response, ['welcome'], 200);
       successResponse = true;
     }
     
     if (['DELETE', 'PUT'].includes(request.method)) {
-      sendResponse(response, 'You Wish!', 401);
+      sendResponse(response, ['You Wish!'], 401);
       successResponse = true;
     }
   }
 
-  (successResponse) || (sendResponse(response, 'Not Found', 404));
+  (successResponse) || (sendResponse(response, ['Not Found'], 404));
   
   
   
